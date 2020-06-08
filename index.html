@@ -82,13 +82,18 @@
     <div id="options">
         <button onclick="calculateForces()">re-calculate</button>
         <button onclick="generate()">regenerate</button><br>
-        <span>collision low</span><input id="startLow" type="number" value="10" min="0.1"><span>collision high</span><input id="startHigh" type="number" value="40"><br>
+        <span>collision low</span><input id="startLow" type="number" value="30" min="0.1"><span>collision high</span><input id="startHigh" type="number" value="70"><br>
         <span>range low</span><input id="rangeLow" type="number" value="150"><span>range high</span><input id="rangeHigh" type="number" value="200" max="200"><br>
-        <span>force low</span><input id="forceLow" type="number" value="-20"><span>force high</span><input id="forceHigh" type="number" value="10"><br>
-        <span>point count</span><input id="count" type="number" value="5000">
+        <span>force low</span><input id="forceLow" type="number" value="-20"><span>force high</span><input id="forceHigh" type="number" value="20"><br>
+        <span>point count</span><input id="count" type="number" value="5000"><br>
+        <span>repulsion divider</span><input id="repulse" type="number" value="5"><br>
+        <span>friction</span><input id="fric" type="number" value="90"><br>
+        <span>clear screen</span><input type="checkbox" id="clear" style="margin: 7px;cursor: pointer;">
+        <span>show chunks</span><input type="checkbox" id="showChunks" style="margin: 7px;cursor: pointer;">
+
     </div>
     <canvas id="cvsBack"style="display: none"></canvas>
-    <script src="quadTree.js"></script>
+    <script src="chunk.js"></script>
     <script src="point.js"></script>
     <script src="draw.js"></script>
     <script src="pps.js"></script>

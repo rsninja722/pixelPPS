@@ -15,26 +15,32 @@ backCtx.fillStyle = "#000000";
 var cw = canvas.width;
 var ch = canvas.height;
 
-var screen; // image data
+backCtx.fillRect(0,0,cw,ch);
+var screen = backCtx.getImageData(0,0,cw,ch); // image data
 var d; // data part of image data
 var yMulti; // data width * 4, used for finding where to draw
 
     
 function draw() {
-    // resize canvases
-    canvas.width = document.body.clientWidth;
-    canvas.height = document.body.offsetHeight < window.innerHeight ? window.innerHeight : document.body.offsetHeight;
-    backCanvas.width = document.body.clientWidth;
-    backCanvas.height = document.body.offsetHeight < window.innerHeight ? window.innerHeight : document.body.offsetHeight;
-    cw = canvas.width;
-    ch = canvas.height;
 
-    // clear canvas
-    ctx.clearRect(0, 0, cw, ch);
+    if(document.getElementById("clear").checked) {
+        // resize canvases
+        if(canvas.width !== document.body.clientWidth || canvas.height !== document.body.offsetHeight < window.innerHeight ? window.innerHeight : document.body.offsetHeight) {
+            canvas.width = document.body.clientWidth;
+            canvas.height = document.body.offsetHeight < window.innerHeight ? window.innerHeight : document.body.offsetHeight;
+            backCanvas.width = document.body.clientWidth;
+            backCanvas.height = document.body.offsetHeight < window.innerHeight ? window.innerHeight : document.body.offsetHeight;
+            cw = canvas.width;
+            ch = canvas.height;
 
-    // get image data
-    backCtx.fillRect(0,0,cw,ch);
-    screen = backCtx.getImageData(0,0,cw,ch);
+            createChunks();
+        }
+
+
+        // get image data
+        backCtx.fillRect(0,0,cw,ch);
+        screen = backCtx.getImageData(0,0,cw,ch);
+    }
     d = screen.data;
 
     // calculate yMulti
@@ -48,6 +54,14 @@ function draw() {
 
     // put image data on canvas
     ctx.putImageData(screen,0,0);
+
+    if(document.getElementById("showChunks").checked) {
+        ctx.strokeStyle = "#ffffff";
+        ctx.fillStyle="#ffff0099";
+        for(var i=0,l=chunks.length;i<l;i++) {
+            chunks[i].draw();
+        }
+    }
 
     // loop
     requestAnimationFrame(draw);
